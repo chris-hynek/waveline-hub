@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: waveline-hub
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/wave/status
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: SEED_TEST_DATA
+        value: "true"
+      - key: WAVE_MODEL
+        value: gpt-4o-mini
+      - key: SLACK_LIVE
+        value: "false"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
